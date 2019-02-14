@@ -1,0 +1,10 @@
+if [ $CONFIGURATION == Release ]; then
+    echo "Bumping build number..."
+    buildNumber=$(date +%Y%m%d%H)
+    notificationServiceInfo="${PROJECT_DIR}/NotificationService/Info.plist"
+    /usr/libexec/PlistBuddy -c "Set CFBundleVersion $buildNumber" "${INFOPLIST_FILE}"
+    /usr/libexec/PlistBuddy -c "Set CFBundleVersion $buildNumber" "$notificationServiceInfo"
+    echo "Bumped build number to $buildNumber"
+else
+    echo $CONFIGURATION " build - Not bumping build number."
+fi
